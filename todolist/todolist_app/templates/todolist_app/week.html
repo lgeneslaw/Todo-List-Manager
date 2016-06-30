@@ -1,0 +1,35 @@
+{% extends 'todolist_app/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-8">
+        <h2>Tasks for the week of {{ month }}/{{ day }}/{{ year }}:</h2>
+        {% for day_tasks in week_tasks %}
+            <!-- display the day as a link to it's day view page -->
+            <h3><a href="{% url 'day' day_tasks.year day_tasks.month day_tasks.day %}">{{ day_tasks.weekday }} {{ day_tasks.month }}/{{ day_tasks.day }}</a></h3>
+            <ul class="task-list">
+                {% for task in day_tasks.tasks %}
+                <li> {{ task.name }}
+                    <!-- check for callouts if task is due soon or past due -->
+                     {% if task.pastDue %} <span class="past-due"> - Past Due</span> {% endif %}
+                     {% if task.dueSoon %} <span class="due-soon"> - Due at {{ task.due|date:"g:i a" }}</span> {% endif %}
+                            | <a href="{% url 'edit_task' task.pk %}">Edit</a>
+                            | <a href="#" onclick="return fireAjax('{% url 'complete_task' task.pk %}')">Complete</a>
+                            | <a href="#" onclick="return fireAjax('{% url 'delete_task' task.pk %}')">Delete</a>
+                </li>
+                {% endfor %}
+            </ul>    
+        {% endfor %}
+    </div>
+    <div class="col-sm-4">
+        <div class="pages">
+            <a class="save btn btn-default" href="{% url 'week' prev_week.year prev_week.month prev_week.day %}">&lt; Prev</a>
+            <a class="save btn btn-default" href="{% url 'week' next_week.year next_week.month next_week.day %}">Next &gt;</a>
+        </div>
+    </div>
+<div>
+
+{% load staticfiles %}
+<script src="{% static 'todolist_app/js/ajax.js' <D-d>%}"></script>
+
+{% endblock %}

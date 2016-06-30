@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'todolist_app/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'todolist_app/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'todolist_app/css/sitestyle.css' %}">
+        <script src="{% static 'todolist_app/js/jquery-2.2.1.js' %}"></script>
+        <script src="{% static 'todolist_app/js/bootstrap.js' %}"></script>
+        {{ form.media }}
+        
+        <title>Todo List Manager</title>
+    </head>
+    
+    <body>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'day' %}">Day View</a></li>
+                    <li><a href="{% url 'week' %}">Week View</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'edit_task' %}">New Task</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </body>
+</html>

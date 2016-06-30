@@ -1,0 +1,25 @@
+{% extends 'todolist_app/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-8">
+    <h2>Incomplete Tasks:</h2> 
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li> {{ task.name }}
+                    <!-- check for callouts if task is due soon or past due -->
+                     {% if task.pastDue %} <span class="past-due"> - Past Due</span> {% endif %}
+                     {% if task.dueSoon %} <span class="due-soon"> - Due at {{ task.due|date:"g:i a" }}</span> {% endif %}
+                            | <a href="{% url 'edit_task' task.pk %}">Edit</a>
+                            | <a href="#" onclick="return fireAjax('{% url 'complete_task' task.pk %}')">Complete</a>
+                            | <a href="#" onclick="return fireAjax('{% url 'delete_task' task.pk %}')">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+<div>
+
+{% load staticfiles %}
+<script src="{% static 'todolist_app/js/ajax.js' %}"></script>
+
+{% endblock %}

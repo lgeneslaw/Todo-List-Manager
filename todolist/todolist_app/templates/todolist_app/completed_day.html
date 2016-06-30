@@ -1,0 +1,20 @@
+{% extends 'todolist_app/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-8">
+        <h2>Completed on {{ weekday }}, {{ date }}:</h2> 
+        <ul class="task-list">
+            {% for task in tasks %}
+            <li>{{ task.name }} - Completed at {{ task.datetime_completed|date:"g:i a" }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-sm-4">
+        <div class="pages">
+            <div><a class="right save btn btn-default" href="{% url 'day' date.year date.month date.day %}">Show Due</a></div>
+            <a class="save btn btn-default" href="{% url 'completed_day' prev_day.year prev_day.month prev_day.day %}">&lt; Prev</a>
+            <a class="save btn btn-default" href="{% url 'completed_day' next_day.year next_day.month next_day.day %}">Next &gt;</a>
+        </div>
+    </div>
+<div>
+{% endblock %}

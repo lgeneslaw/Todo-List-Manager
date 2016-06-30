@@ -1,0 +1,8 @@
+Django==1.9.7
+django-datetime-widget==0.9.3
+docopt==0.6.2
+pipreqs==0.4.3
+pytz==2016.4
+requests==2.10.0
+tzlocal==1.2.2
+yarg==0.1.9
