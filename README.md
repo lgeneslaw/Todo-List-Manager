@@ -27,3 +27,7 @@ The following files are found within todolist/todolist_app
  - urls.py - maps URL regular expressions to target methods in views.py
  - forms.py - defines the form for creating/editing a Task
  - templates/todolist_app - directory containing the page templates served by views.py
+
+##Improvements
+ - Timezone support
+ - Multiple accounts
